@@ -1,0 +1,4 @@
+--skip-sprockets
+--skip-test
+--skip-action-cable
+--skip-action-mailbox
