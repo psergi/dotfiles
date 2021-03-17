@@ -28,6 +28,7 @@ Plug 'stephpy/vim-yaml'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'vim-test/vim-test'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -167,8 +168,8 @@ nmap <silent> <Leader>l :TestLast<CR>
 
 " use docker command if there is a docker compose file in the root
 if !empty(glob("docker-compose.yml"))
-  let test#ruby#rspec#executable = 'docker-compose exec app bundle exec rspec'
-end
+  let test#ruby#rspec#executable = 'docker-compose exec spring spring rspec'
+endif
 
 let g:markdown_fenced_languages = ['html', 'json', 'ruby', 'bash=sh', 'javascript', 'jsx=javascript', 'css', 'scss']
 
@@ -195,8 +196,14 @@ nnoremap <space> za
 " ALE Linter
 let g:ale_linters = { 'javascript': ['eslint'], 'ruby': ['rubocop'], 'php': ['phpcs'] }
 let g:ale_linters_explicit = 1
-let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_php_phpcs_executable='./vendor/bin/phpcs'
+
+if !empty(glob("docker-compose.yml"))
+  let g:ale_ruby_rubocop_executable = 'bin/ale-rubocop'
+  let g:ale_javascript_eslint_executable = 'bin/ale-eslint'
+else
+  let g:ale_ruby_rubocop_executable = 'bundle'
+endif
 
 " Auto Pairs
 let g:AutoPairsMultilineClose = 0
