@@ -13,7 +13,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'pangloss/vim-javascript'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'posva/vim-vue'
@@ -145,8 +145,6 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
-
-let $FZF_DEFAULT_COMMAND = 'fd --type f'
 
 "
 " ================ Vue ======================
