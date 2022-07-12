@@ -103,8 +103,8 @@ set undodir=~/.vim/undo//
 "
 " ================ FZF ======================
 "
-map ; :Files<CR>
-map l :Buffers<CR>
+" map ; :Files<CR>
+" map l :Buffers<CR>
 "
 " This is the default extra key bindings
 let g:fzf_action = {
