@@ -22,5 +22,12 @@ ln -sf ${BASEDIR}/gitconfig ~/.gitconfig
 # rails
 ln -sf ${BASEDIR}/railsrc ~/.railsrc
 
+# zsh
+cat ${BASEDIR}/zshrc >> ~/.zshrc
+
 # Install vim plugins
 vim +'PlugInstall --sync' +qa
+
+# Finish
+echo -e "\nInstall successful!\n"
+echo "Run 'source ~/.zshrc' to complete setup"
