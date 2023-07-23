@@ -15,6 +15,7 @@ ln -sf ${BASEDIR}/vimrc ~/.vimrc
 ln -sf ${BASEDIR}/gvimrc ~/.gvimrc
 rm -rf ~/.vim
 ln -sf ${BASEDIR}/vim ~/.vim
+ln -sf ${BASEDIR}/nvchad-custom ~/.config/nvim/lua/custom
 
 # git
 ln -sf ${BASEDIR}/gitconfig ~/.gitconfig
