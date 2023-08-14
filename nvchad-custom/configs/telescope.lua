@@ -1,4 +1,9 @@
 local options = {
+  pickers = {
+    find_files = {
+      follow = true
+    }
+  },
   extensions_list = { "themes", "terms", "fzf" },
   extensions = {
     fzf = {

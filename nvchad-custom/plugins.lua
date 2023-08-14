@@ -47,6 +47,15 @@ local plugins = {
     }
   },
 
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      local defaults = require "plugins.configs.cmp"
+      local custom = require "custom.configs.cmp"
+      return vim.tbl_deep_extend("force", defaults, custom)
+    end,
+  },
+
   -- additional plugins
 
   {
@@ -54,8 +63,8 @@ local plugins = {
     lazy = false,
     init = function()
       vim.cmd [[
-        let test#strategy = "neovim"
-        let test#ruby#rspec#executable = "COVERAGE=false bundle exec spring rspec"
+        let test#strategy = "toggleterm"
+        let test#ruby#rspec#executable = "clear && COVERAGE=false bundle exec spring rspec"
         let test#go#gotest#options = { "all": "-v" }
       ]]
     end,
@@ -68,7 +77,10 @@ local plugins = {
 
   {
     "tpope/vim-fugitive",
-    lazy = false
+    lazy = false,
+    config = function(_, _)
+      dofile(vim.g.base46_cache .. "git")
+    end
   },
 
   {
@@ -77,12 +89,13 @@ local plugins = {
     init = function()
       vim.cmd [[
         let g:ale_linter_aliases = { "vue": ["vue", "javascript"] }
-        let g:ale_linters = { "javascript": ["eslint"], "ruby": ["rubocop"], "vue": ["eslint", "vls"], "go": ["golangci-lint"] }
+        let g:ale_linters = { "javascript": ["eslint"], "typescript": ["eslint"], "ruby": ["rubocop"], "vue": ["eslint", "vls"], "go": ["golangci-lint"] }
         let g:ale_linters_explicit = 1
         let g:ale_ruby_rubocop_executable = "bundle"
         let g:ale_fixers = { "go": ["gofumpt"] }
         let g:ale_fix_on_save = 0
         let g:ale_virtualtext_cursor = "current"
+        " let g:ale_go_golangci_lint_package = 1
       ]]
     end,
   },
@@ -97,6 +110,7 @@ local plugins = {
     version = "*",
     init = function()
       require("toggleterm").setup({
+        size = 15,
         shade_terminals = false,
         open_mapping = [[<C-\>]]
       })
