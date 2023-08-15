@@ -129,6 +129,10 @@
   "Use Italic Font" : true,
   "Unlimited Scrollback" : false,
   "Keyboard Map" : {
+    "0xf704-0x20000" : {
+      "Text" : "[1;2P",
+      "Action" : 10
+    },
     "0xf700-0x260000" : {
       "Text" : "[1;6A",
       "Action" : 10
@@ -184,6 +188,12 @@
     "0xf703-0x220000" : {
       "Text" : "[1;2C",
       "Action" : 10
+    },
+    "0x70-0x100000-0x23" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\<C-p>",
+      "Label" : ""
     },
     "0xf701-0x240000" : {
       "Text" : "[1;5B",
@@ -287,9 +297,11 @@
       "Text" : "[1;5D",
       "Action" : 10
     },
-    "0xf704-0x20000" : {
-      "Text" : "[1;2P",
-      "Action" : 10
+    "0x6c-0x100000-0x25" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\<C-l>",
+      "Label" : ""
     }
   },
   "Window Type" : 0,
