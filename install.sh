@@ -51,7 +51,7 @@ brew install --cask iterm2 --no-quarantine
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # iterm2 profile
-cp -f ${BASEDIR}/iterm2/Dev.json ~/Library/Application\ Support/iTerm2/DynamicProfiles
+cp -f ${BASEDIR}/iterm2/Profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles
 
 # nvim
 rm -rf ~/.config/nvim/lua/custom
