@@ -6,8 +6,15 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
-# Install Homebrew: https://brew.sh/
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Install/Update Homebrew: https://brew.sh/
+which -s brew
+if [[ $? != 0 ]]; then
+  # Install
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+  # Update
+  brew update
+fi
 
 if [ "$(arch)" = "arm64" ]; then
   (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
@@ -40,8 +47,9 @@ brew install ripgrep
 
 # Install Neovim
 brew install neovim
-rm -rf ~/.config/nvim
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+if [[ ! -d ~/.config/nvim ]]; then
+  git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+fi
 
 # Install Docker
 brew install --cask docker --no-quarantine
