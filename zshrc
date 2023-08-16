@@ -1,3 +1,2 @@
-
-# MacVim shortcut
-alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
+alias vim="nvim"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
