@@ -28,7 +28,7 @@ brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-fon
 
 # Install Ruby and related tools
 brew install rbenv ruby-build
-rbenv install -l
+rbenv install -s $(rbenv install -l | grep -v - | tail -1)
 
 # Install Go and related tools
 brew install go
@@ -40,6 +40,7 @@ brew install ripgrep
 
 # Install Neovim
 brew install neovim
+rm -rf ~/.config/nvim
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
 # Install Docker
@@ -51,11 +52,12 @@ brew install --cask iterm2 --no-quarantine
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # iterm2 profile
+mkdir -p ~/Library/Application\ Support/iTerm2/DynamicProfiles
 cp -f ${BASEDIR}/iterm2/Profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles
 
 # nvim
 rm -rf ~/.config/nvim/lua/custom
-ln -sf ${BASEDIR}/nvchad-custom ~/.config/nvim/lua/custom
+ln -sf ${BASEDIR}/nvim/nvchad_custom ~/.config/nvim/lua/custom
 
 # ripgrep
 ln -sf ${BASEDIR}/ripgreprc ~/.ripgreprc
@@ -67,7 +69,7 @@ ln -sf ${BASEDIR}/gitconfig ~/.gitconfig
 ln -sf ${BASEDIR}/railsrc ~/.railsrc
 
 # zsh
-if [ $(grep -c "DOTFILES BEGIN" ~/.zshrc == "0" ]
+if [ $(grep -c "DOTFILES BEGIN" ~/.zshrc) == "0" ]; then
   cat ${BASEDIR}/zshrc >> ~/.zshrc
 else
   sed -i '' -e "/# DOTFILES BEGIN/r ${BASEDIR}/zshrc" -e "/# DOTFILES BEGIN/,/# DOTFILES END/d" ~/.zshrc
