@@ -32,6 +32,10 @@ brew install git
 
 # Install Fonts
 brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font
+if [[ ! -f ~/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf ]]; then
+  brew reinstall --cask font-jetbrains-mono-nerd-font
+fi
+
 
 # Install Ruby and related tools
 brew install rbenv ruby-build
