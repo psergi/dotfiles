@@ -9,6 +9,8 @@ fi
 
 # Install Homebrew: https://brew.sh/
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/philsergi/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Install oh my zsh: https://ohmyz.sh/#install
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -23,6 +25,7 @@ brew install git
 brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font
 
 # Install go tools
+brew install go
 brew install gofumpt
 brew install golangci-lint
 
@@ -31,10 +34,20 @@ brew install ripgrep
 
 # Install Neovim
 brew install neovim
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+
+# Install Docker
+brew install --cask docker
+
+# Install Ruby (rbenv)
+brew install rbenv ruby-build
+rbenv init
+rbenv install -l
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # vim
+rm -rf ~/.config/nvim/lua/custom
 ln -sf ${BASEDIR}/nvchad-custom ~/.config/nvim/lua/custom
 
 # ripgrep
