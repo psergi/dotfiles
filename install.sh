@@ -2,21 +2,23 @@
 
 read -p "Installing will overwrite any existing files, continue? (y/n) " -n 1 -r
 echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
 # Install Homebrew: https://brew.sh/
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/philsergi/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
+
+if [ "$(arch)" = "arm64" ]; then
+  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
 
 # Install oh my zsh: https://ohmyz.sh/#install
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Install iterm2
-brew install --cask iterm2
 
 # Install Git
 brew install git
@@ -24,7 +26,11 @@ brew install git
 # Install Fonts
 brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font
 
-# Install go tools
+# Install Ruby and related tools
+brew install rbenv ruby-build
+rbenv install -l
+
+# Install Go and related tools
 brew install go
 brew install gofumpt
 brew install golangci-lint
@@ -37,16 +43,17 @@ brew install neovim
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
 # Install Docker
-brew install --cask docker
+brew install --cask docker --no-quarantine
 
-# Install Ruby (rbenv)
-brew install rbenv ruby-build
-rbenv init
-rbenv install -l
+# Install iterm2
+brew install --cask iterm2 --no-quarantine
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# vim
+# iterm2 profile
+cp -f ${BASEDIR}/iterm2/Dev.json ~/Library/Application\ Support/iTerm2/DynamicProfiles
+
+# nvim
 rm -rf ~/.config/nvim/lua/custom
 ln -sf ${BASEDIR}/nvchad-custom ~/.config/nvim/lua/custom
 
@@ -60,7 +67,11 @@ ln -sf ${BASEDIR}/gitconfig ~/.gitconfig
 ln -sf ${BASEDIR}/railsrc ~/.railsrc
 
 # zsh
-cat ${BASEDIR}/zshrc >> ~/.zshrc
+if [ $(grep -c "DOTFILES BEGIN" ~/.zshrc == "0" ]
+  cat ${BASEDIR}/zshrc >> ~/.zshrc
+else
+  sed -i '' -e "/# DOTFILES BEGIN/r ${BASEDIR}/zshrc" -e "/# DOTFILES BEGIN/,/# DOTFILES END/d" ~/.zshrc
+fi
 
 # Finish
 echo -e "\nInstall successful!\n"
