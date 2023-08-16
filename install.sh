@@ -36,7 +36,6 @@ if [[ ! -f ~/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf ]]; then
   brew reinstall --cask font-jetbrains-mono-nerd-font
 fi
 
-
 # Install Ruby and related tools
 brew install rbenv ruby-build
 rbenv install -s $(rbenv install -l | grep -v - | tail -1)
@@ -66,6 +65,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # iterm2 profile
 mkdir -p ~/Library/Application\ Support/iTerm2/DynamicProfiles
 cp -f ${BASEDIR}/iterm2/Profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles
+defaults write com.googlecode.iterm2.plist "Default Bookmark Guid" -string 6F5D68B4-00E5-4B1E-9A3F-E77798EF1561
 
 # nvim
 rm -rf ~/.config/nvim/lua/custom
