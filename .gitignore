@@ -1,10 +1,1 @@
-vim/backup/*
-!vim/backup/.keep
-
-vim/swap/*
-!vim/swap/.keep
-
-vim/undo/*
-!vim/undo/.keep
-
-vim/plugged
+Brewfile.lock.json

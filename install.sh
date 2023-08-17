@@ -8,13 +8,11 @@ if [[ ! -f ~/.gitconfig_local ]]; then
   read -p "Email: " email
 fi
 
-# Install/Update Homebrew: https://brew.sh/
+# Install/Update Homebrew
 which -s brew
 if [[ $? != 0 ]]; then
-  # Install
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-  # Update
   brew update
 fi
 
@@ -26,45 +24,34 @@ else
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-# Install oh my zsh: https://ohmyz.sh/#install
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+# Install packages using Brewfile
+brew bundle
 
-# Install Git
-brew install git
+# Oh my zsh
+if [[ ! -d $ZSH ]]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
 
-# Install Fonts
-brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font
+# Ensure fonts are installed (migration assistant workaround)
 if [[ ! -f ~/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf ]]; then
   brew reinstall --cask font-jetbrains-mono-nerd-font
 fi
 
-# Install Ruby and related tools
-brew install rbenv ruby-build
+# Install latest version of ruby
 latest_ruby_version=$(rbenv install -l | grep -v - | tail -1)
 rbenv install -s ${latest_ruby_version}
 
-# Install Go and related tools
-brew install goenv
+# Install latest version of go and dev tools
 latest_go_version=$(goenv install -l | grep -v - | tail -1)
 goenv install -s ${latest_go_version}
 goenv global ${latest_go_version}
 go install mvdan.cc/gofumpt@latest
 go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.54.1
 
-# Install ripgrep
-brew install ripgrep
-
-# Install Neovim
-brew install neovim
+# Install Neovim config (NvChad)
 if [[ ! -d ~/.config/nvim ]]; then
   git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 fi
-
-# Install Docker
-brew install --cask docker --no-quarantine
-
-# Install iterm2
-brew install --cask iterm2 --no-quarantine
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -97,12 +84,10 @@ else
 fi
 
 if [[ ! -f ~/.gitconfig_local ]]; then
-  # Git local config
   git config -f ~/.gitconfig_local user.email "$email"
   git config -f ~/.gitconfig_local user.name "$full_name"
 fi
 
-# Finish
 echo
-echo "Install successful!"
+echo "Install Successful!"
 echo
