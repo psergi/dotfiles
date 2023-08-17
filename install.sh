@@ -1,16 +1,12 @@
 #!/bin/bash
 
-read -p "Installing will overwrite any existing files, continue? (y/n) " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-  exit 1
+if [[ ! -f ~/.gitconfig_local ]]; then
+  echo
+  echo "Git user configuration (this will be saved in ~/.gitconfig_local)"
+  echo "---"
+  read -p "Name: " full_name
+  read -p "Email: " email
 fi
-
-echo
-echo "Git user configuration (this will be saved in ~/.gitconfig_local)"
-echo "---"
-read -p "Name: " full_name
-read -p "Email: " email
 
 # Install/Update Homebrew: https://brew.sh/
 which -s brew
@@ -44,12 +40,16 @@ fi
 
 # Install Ruby and related tools
 brew install rbenv ruby-build
-rbenv install -s $(rbenv install -l | grep -v - | tail -1)
+latest_ruby_version=$(rbenv install -l | grep -v - | tail -1)
+rbenv install -s ${latest_ruby_version}
 
 # Install Go and related tools
-brew install go
-brew install gofumpt
-brew install golangci-lint
+brew install goenv
+latest_go_version=$(goenv install -l | grep -v - | tail -1)
+goenv install -s ${latest_go_version}
+goenv global ${latest_go_version}
+go install mvdan.cc/gofumpt@latest
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.54.1
 
 # Install ripgrep
 brew install ripgrep
@@ -96,9 +96,11 @@ else
   sed -i '' -e "/# DOTFILES BEGIN/r ${BASEDIR}/zshrc" -e "/# DOTFILES BEGIN/,/# DOTFILES END/d" ~/.zshrc
 fi
 
-# Git local config
-git config -f ~/.gitconfig_local user.email "$email"
-git config -f ~/.gitconfig_local user.name "$full_name"
+if [[ ! -f ~/.gitconfig_local ]]; then
+  # Git local config
+  git config -f ~/.gitconfig_local user.email "$email"
+  git config -f ~/.gitconfig_local user.name "$full_name"
+fi
 
 # Finish
 echo
