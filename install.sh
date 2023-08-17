@@ -71,7 +71,9 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # iterm2 profile
 mkdir -p ~/Library/Application\ Support/iTerm2/DynamicProfiles
 cp -f ${BASEDIR}/iterm2/Profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles
+# Set the default profile
 defaults write com.googlecode.iterm2.plist "Default Bookmark Guid" -string 6F5D68B4-00E5-4B1E-9A3F-E77798EF1561
+# Set the iterm window theme to "Minimal"
 defaults write com.googlecode.iterm2.plist "TabStyleWithAutomaticOption" -integer 5
 
 # nvim
