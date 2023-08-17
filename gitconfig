@@ -1,6 +1,7 @@
 [user]
-	name = Phil Sergi
-	email = phil.sergi@gmail.com
+	# These values are set in ~/.gitconfig_local
+[include]
+	path = ~/.gitconfig_local
 [color]
 	ui = true
 [color "branch"]

@@ -1,10 +1,16 @@
 #!/bin/bash
 
 read -p "Installing will overwrite any existing files, continue? (y/n) " -n 1 -r
-echo    # (optional) move to a new line
+echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
   exit 1
 fi
+
+echo
+echo "Git user configuration (this will be saved in ~/.gitconfig_local)"
+echo "---"
+read -p "Name: " full_name
+read -p "Email: " email
 
 # Install/Update Homebrew: https://brew.sh/
 which -s brew
@@ -88,5 +94,11 @@ else
   sed -i '' -e "/# DOTFILES BEGIN/r ${BASEDIR}/zshrc" -e "/# DOTFILES BEGIN/,/# DOTFILES END/d" ~/.zshrc
 fi
 
+# Git local config
+git config -f ~/.gitconfig_local user.email "$email"
+git config -f ~/.gitconfig_local user.name "$full_name"
+
 # Finish
-echo -e "\nInstall successful!\n"
+echo
+echo "Install successful!"
+echo
