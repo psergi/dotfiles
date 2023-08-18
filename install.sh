@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Prompt to install Xcode command line tools, ignore if already installed.
-xcode-select --install &> /dev/null
-
 if [[ ! -f ~/.gitconfig_local ]]; then
   echo
   echo "Git user configuration (this will be saved in ~/.gitconfig_local)"
