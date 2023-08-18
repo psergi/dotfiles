@@ -45,8 +45,8 @@ rbenv install -s ${latest_ruby_version}
 latest_go_version=$(goenv install -l | grep -v - | tail -1)
 goenv install -s ${latest_go_version}
 goenv global ${latest_go_version}
-go install mvdan.cc/gofumpt@latest
-go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.54.1
+goenv exec go install mvdan.cc/gofumpt@latest
+goenv exec go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.54.1
 
 # Install Neovim config (NvChad)
 if [[ ! -d ~/.config/nvim ]]; then
