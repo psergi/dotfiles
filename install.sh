@@ -12,16 +12,15 @@ fi
 which -s brew
 if [[ $? != 0 ]]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if [ "$(arch)" = "arm64" ]; then
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  else
+    (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
 else
   brew update
-fi
-
-if [ "$(arch)" = "arm64" ]; then
-  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-  (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile
-  eval "$(/usr/local/bin/brew shellenv)"
 fi
 
 # Install packages using Brewfile
