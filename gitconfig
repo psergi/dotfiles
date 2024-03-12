@@ -15,3 +15,5 @@
 	new = green
 [merge]
 	tool = vimdiff
+[init]
+	defaultBranch = main

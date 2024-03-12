@@ -7,6 +7,10 @@ opt.wrap = false
 opt.ignorecase = false
 opt.smartcase = false
 opt.autoindent = true
+-- Code folding
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99
 
 -- go formatting
 vim.cmd("autocmd Filetype go setlocal noexpandtab shiftwidth=4 tabstop=4")

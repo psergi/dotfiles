@@ -3,6 +3,7 @@ local M = {}
 M.general = {
   n = {
     ["<C-a>"] = { "<C-^>", "Alternate file" },
+    ["<Bslash>r"] = { "<cmd> TermExec cmd=\"go run main.go\" <CR>" }
   }
 }
 

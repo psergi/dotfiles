@@ -6,6 +6,10 @@ brew "ruby-build"
 brew "goenv"
 brew "ripgrep"
 brew "neovim"
+brew "helm"
+brew "aws"
+brew "sops"
+brew "age"
 
 cask "font-jetbrains-mono-nerd-font"
 cask "docker", args: { no_quarantine: true }

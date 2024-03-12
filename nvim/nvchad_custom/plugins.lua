@@ -67,7 +67,11 @@ local plugins = {
     init = function()
       vim.cmd [[
         let test#strategy = "toggleterm"
-        let test#ruby#rspec#executable = "clear && COVERAGE=false bundle exec spring rspec"
+        if filereadable('bin/spring')
+          let test#ruby#rspec#executable = "clear && COVERAGE=false bundle exec spring rspec"
+        else
+          let test#ruby#rspec#executable = "clear && COVERAGE=false bundle exec rspec"
+        endif
         let test#go#gotest#options = { "all": "-v" }
       ]]
     end,
@@ -75,7 +79,7 @@ local plugins = {
 
   {
     "tpope/vim-rails",
-    ft = { "ruby" }
+    ft = { "ruby", "eruby" }
   },
 
   {
@@ -92,20 +96,22 @@ local plugins = {
     init = function()
       vim.cmd [[
         let g:ale_linter_aliases = { "vue": ["vue", "javascript"] }
-        let g:ale_linters = { "javascript": ["eslint"], "typescript": ["eslint"], "ruby": ["rubocop"], "vue": ["eslint", "vls"], "go": ["golangci-lint"] }
+        let g:ale_linters = { "javascript": ["eslint"], "typescript": ["eslint"], "ruby": ["rubocop"], "vue": ["eslint", "vls"], "go": ["golangci-lint"], "scss": ["stylelint"] }
         let g:ale_linters_explicit = 1
+        let g:ale_use_neovim_diagnostics_api = 0
         let g:ale_ruby_rubocop_executable = "bundle"
-        let g:ale_fixers = { "go": ["gofumpt"] }
-        let g:ale_fix_on_save = 0
+        let g:ale_fixers = { "go": ["gofumpt"], "javascript": ["eslint"] }
+        let g:ale_fix_on_save = 1
+        let g:ale_fix_on_save_ignore = ["eslint"]
         let g:ale_virtualtext_cursor = "current"
-        " let g:ale_go_golangci_lint_package = 1
+        let g:ale_go_golangci_lint_package = 1
       ]]
     end,
   },
 
   {
     "andymass/vim-matchup",
-    lazy = false
+    ft = { "ruby" }
   },
 
   {
@@ -113,7 +119,7 @@ local plugins = {
     version = "*",
     init = function()
       require("toggleterm").setup({
-        size = 15,
+        size = 20,
         shade_terminals = false,
         open_mapping = [[<C-\>]]
       })

@@ -6,10 +6,15 @@ local options = {
     "javascript",
     "typescript",
     "vue",
+    "json",
+    "html",
     "css",
     "scss",
     "diff",
-    "ruby"
+    "ruby",
+    "svelte",
+    "vim",
+    "vimdoc"
   },
   indent = { enable = true }
 }
