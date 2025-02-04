@@ -1,0 +1,20 @@
+-- Setup leader keys
+vim.g.mapleader = "\\"
+vim.g.maplocalleader = "\\\\"
+
+default_opts = { noremap = true, silent = true }
+
+-- NvimTree
+vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", default_opts)
+
+-- Telescope
+vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", default_opts)
+vim.keymap.set("n", "<C-l>", ":Telescope live_grep_args<CR>", default_opts)
+
+-- Vim Test
+vim.keymap.set("n", "<leader>s", ":TestNearest<CR>", default_opts)
+vim.keymap.set("n", "<leader>t", ":TestFile<CR>", default_opts)
+vim.keymap.set("n", "<leader>a", ":TestSuite<CR>", default_opts)
+
+-- ToggleTerm
+-- see open_mapping within toggleterm.lua

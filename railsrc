@@ -3,3 +3,6 @@
 --javascript=esbuild
 --css=sass
 --skip-test
+--skip-kamal
+--skip-solid
+--skip-thruster

@@ -45,12 +45,8 @@ latest_go_version=$(goenv install -l | grep -v - | tail -1)
 goenv install -s ${latest_go_version}
 goenv global ${latest_go_version}
 goenv exec go install mvdan.cc/gofumpt@latest
-goenv exec go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.54.1
-
-# Install Neovim config (NvChad)
-if [[ ! -d ~/.config/nvim ]]; then
-  git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-fi
+goenv exec go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.63.4
+goenv exec go install golang.org/x/tools/gopls@latest
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -63,8 +59,7 @@ defaults write com.googlecode.iterm2.plist "Default Bookmark Guid" -string 6F5D6
 defaults write com.googlecode.iterm2.plist "TabStyleWithAutomaticOption" -integer 5
 
 # nvim
-rm -rf ~/.config/nvim/lua/custom
-ln -sf ${BASEDIR}/nvim/nvchad_custom ~/.config/nvim/lua/custom
+ln -sf ${BASEDIR}/nvim ~/.config/nvim
 
 # ripgrep
 ln -sf ${BASEDIR}/ripgreprc ~/.ripgreprc
