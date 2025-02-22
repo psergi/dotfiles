@@ -4,7 +4,7 @@ return {
   init = function()
     vim.cmd [[
       let g:ale_linter_aliases = { "vue": ["vue", "javascript"] }
-      let g:ale_linters = { "javascript": ["eslint"], "typescript": ["eslint"], "ruby": ["rubocop"], "vue": ["eslint", "vls"], "go": ["golangci-lint"], "scss": ["stylelint"] }
+      let g:ale_linters = { "javascript": ["eslint"], "typescript": ["eslint", "tsserver"], "ruby": ["rubocop"], "vue": ["eslint", "vls"], "go": ["golangci-lint"], "scss": ["stylelint"] }
       let g:ale_linters_explicit = 1
       let g:ale_use_neovim_diagnostics_api = 0
       let g:ale_ruby_rubocop_executable = "bundle"

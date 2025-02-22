@@ -3,6 +3,9 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
 
+    -- TypeScript
+    lspconfig.ts_ls.setup({});
+
     -- Go
     lspconfig.gopls.setup({
       cmd = { "gopls" },

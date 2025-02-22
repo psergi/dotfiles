@@ -16,5 +16,11 @@ vim.keymap.set("n", "<leader>s", ":TestNearest<CR>", default_opts)
 vim.keymap.set("n", "<leader>t", ":TestFile<CR>", default_opts)
 vim.keymap.set("n", "<leader>a", ":TestSuite<CR>", default_opts)
 
+-- Clear search when hitting escape
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", default_opts)
+
+-- Alternate file
+vim.keymap.set("n", "<C-a>", "<C-^>", default_opts)
+
 -- ToggleTerm
 -- see open_mapping within toggleterm.lua
