@@ -20,7 +20,12 @@ return {
         let g:ale_command_wrapper = "bin/docker-cmd"
         let g:ale_ruby_rubocop_executable = "rubocop"
       endif
-      let g:ale_fixers = { "go": ["gofumpt"], "javascript": ["eslint"] }
+      let g:ale_fixers = {
+        \ "go": ["gofumpt"],
+        \ "javascript": ["eslint"],
+        \ "typescript": ["eslint"],
+        \ "typescriptreact": ["eslint"]
+      \ }
       let g:ale_fix_on_save = 1
       let g:ale_fix_on_save_ignore = ["eslint"]
       let g:ale_virtualtext_cursor = "current"
