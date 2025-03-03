@@ -18,3 +18,14 @@ vim.opt.expandtab = true
 
 -- Enable signcolumn always so Ale doesn't shift it
 vim.opt.signcolumn = "yes"
+
+-- Format comments correctly
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    local cs = vim.bo.commentstring
+    if cs and not cs:find(" %%s") then
+      vim.bo.commentstring = cs:gsub("%%s", " %%s")
+    end
+  end,
+})
