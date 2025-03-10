@@ -22,9 +22,9 @@ return {
       endif
       let g:ale_fixers = {
         \ "go": ["gofumpt"],
-        \ "javascript": ["eslint"],
-        \ "typescript": ["eslint"],
-        \ "typescriptreact": ["eslint"]
+        \ "javascript": ["eslint", "prettier"],
+        \ "typescript": ["eslint", "prettier"],
+        \ "typescriptreact": ["eslint", "prettier"]
       \ }
       let g:ale_fix_on_save = 1
       let g:ale_fix_on_save_ignore = ["eslint"]

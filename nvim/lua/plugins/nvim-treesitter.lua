@@ -21,7 +21,8 @@ return {
         "svelte",
         "vim",
         "vimdoc",
-        "gotmpl"
+        "gotmpl",
+        "mermaid"
       },
       sync_install = false,
       highlight = { enable = true },
