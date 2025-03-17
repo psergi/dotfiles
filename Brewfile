@@ -7,7 +7,7 @@ brew "goenv"
 brew "ripgrep"
 brew "neovim"
 brew "helm"
-brew "aws"
+brew "awscli"
 brew "sops"
 brew "age"
 

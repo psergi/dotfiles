@@ -48,6 +48,9 @@ goenv exec go install mvdan.cc/gofumpt@latest
 goenv exec go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.63.4
 goenv exec go install golang.org/x/tools/gopls@latest
 
+# Install NVM (Node Version Manager)
+curl -sS -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # iterm2 profile
@@ -59,7 +62,7 @@ defaults write com.googlecode.iterm2.plist "Default Bookmark Guid" -string 6F5D6
 defaults write com.googlecode.iterm2.plist "TabStyleWithAutomaticOption" -integer 5
 
 # nvim
-ln -sf ${BASEDIR}/nvim ~/.config/nvim
+ln -sfn ${BASEDIR}/nvim ~/.config/nvim
 
 # ripgrep
 ln -sf ${BASEDIR}/ripgreprc ~/.ripgreprc
