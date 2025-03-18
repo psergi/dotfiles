@@ -61,6 +61,9 @@ defaults write com.googlecode.iterm2.plist "Default Bookmark Guid" -string 6F5D6
 # Set the iterm window theme to "Minimal"
 defaults write com.googlecode.iterm2.plist "TabStyleWithAutomaticOption" -integer 5
 
+# Terminal.app settings
+osascript ${BASEDIR}/terminal/settings.scpt
+
 # nvim
 ln -sfn ${BASEDIR}/nvim ~/.config/nvim
 
