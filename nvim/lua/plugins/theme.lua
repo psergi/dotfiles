@@ -31,7 +31,11 @@ return {
     }
   },
   config = function(_, opts)
-    require("nightfox").setup(opts);
-    vim.cmd("colorscheme nightfox")
+    if vim.o.termguicolors then
+      require("nightfox").setup(opts);
+      vim.cmd("colorscheme nightfox")
+    else
+      vim.cmd("colorscheme industry")  -- Basic 256-color fallback
+    end
   end
 }

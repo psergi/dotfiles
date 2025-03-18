@@ -3,7 +3,9 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- enable 24-bit colour
-vim.opt.termguicolors = true
+if vim.env.COLORTERM == "truecolor" or vim.env.COLORTERM == "24bit" then
+  vim.opt.termguicolors = true
+end
 
 -- enable line number and relative line number
 vim.opt.number = true
