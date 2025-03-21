@@ -10,6 +10,7 @@ vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", default_opts)
 -- Telescope
 vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", default_opts)
 vim.keymap.set("n", "<C-l>", ":Telescope live_grep_args<CR>", default_opts)
+vim.keymap.set("n", "<C-o>", ":Telescope buffers<CR>", default_opts)
 
 -- Vim Test
 vim.keymap.set("n", "<leader>s", ":TestNearest<CR>", default_opts)

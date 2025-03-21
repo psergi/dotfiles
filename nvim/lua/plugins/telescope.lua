@@ -46,5 +46,15 @@ return {
         auto_quoting = false, -- enable/disable auto-quoting
       }
     },
-  }
+  },
+  config = function(_, opts)
+    local telescope = require("telescope")
+    telescope.setup(opts)
+
+    -- load extensions
+    local extensions = { "fzf", "live_grep_args" }
+    for _, ext in ipairs(extensions) do
+      telescope.load_extension(ext)
+    end
+  end
 }
