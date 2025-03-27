@@ -27,6 +27,10 @@ return {
           fg = "NONE",
           bg = "#236827"
         },
+        MatchParen = {
+          fg = "NONE",
+          bg = "#263B53"
+        }
       }
     }
   },
