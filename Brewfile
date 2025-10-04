@@ -1,5 +1,3 @@
-tap "homebrew/cask-fonts"
-
 brew "git"
 brew "rbenv"
 brew "ruby-build"

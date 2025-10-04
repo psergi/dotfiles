@@ -26,6 +26,19 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevelstart = 99
 
+-- Diagnostics
+vim.diagnostic.config({
+  virtual_text = false,  -- inline text
+  signs = true,         -- gutter icons
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true
+})
+
+-- Show floating message on hover
+vim.o.updatetime = 300
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]]
+
 -- Format comments correctly
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
@@ -34,5 +47,26 @@ vim.api.nvim_create_autocmd("FileType", {
     if cs and not cs:find(" %%s") then
       vim.bo.commentstring = cs:gsub("%%s", " %%s")
     end
+  end,
+})
+
+-- TypeScript gf use telescope
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  callback = function()
+    vim.keymap.set("n", "gf", function()
+      vim.lsp.buf.type_definition()
+    end, { buffer = true })
+    -- vim.keymap.set("n", "gf", "<cmd>Telescope lsp_type_definitions<CR>", { buffer = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact", "ruby" },
+  callback = function()
+    vim.keymap.set("n", "gd", function()
+      vim.lsp.buf.definition()
+    end, { buffer = true })
+    -- vim.keymap.set("n", "gf", "<cmd>Telescope lsp_type_definitions<CR>", { buffer = true })
   end,
 })

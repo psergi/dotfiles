@@ -7,9 +7,9 @@ return {
       if filereadable('bin/docker-cmd')
         let test#ruby#rspec#executable = "bin/docker-cmd spring rspec"
       elseif filereadable('bin/spring')
-        let test#ruby#rspec#executable = "clear && COVERAGE=false bundle exec spring rspec"
+        let test#ruby#rspec#executable = "clear && bin/spring rspec --no-profile"
       else
-        let test#ruby#rspec#executable = "clear && COVERAGE=false bundle exec rspec"
+        let test#ruby#rspec#executable = "clear && bundle exec rspec --no-profile"
       endif
       let test#go#gotest#options = { "all": "-v" }
     ]]
