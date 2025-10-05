@@ -26,30 +26,21 @@ fi
 # Install packages using Brewfile
 brew bundle
 
-# Oh my zsh
-if [[ ! -d $ZSH ]]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
-
 # Ensure fonts are installed (migration assistant workaround)
 if [[ ! -f ~/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf ]]; then
   brew reinstall --cask font-jetbrains-mono-nerd-font
 fi
 
 # Install latest version of ruby
-latest_ruby_version=$(rbenv install -l | grep -v - | tail -1)
-rbenv install -s ${latest_ruby_version}
+mise install ruby@latest
+mise use -g ruby@latest
 
 # Install latest version of go and dev tools
-latest_go_version=$(goenv install -l | grep -v - | tail -1)
-goenv install -s ${latest_go_version}
-goenv global ${latest_go_version}
-goenv exec go install mvdan.cc/gofumpt@latest
-goenv exec go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.63.4
-goenv exec go install golang.org/x/tools/gopls@latest
-
-# Install NVM (Node Version Manager)
-curl -sS -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+mise install go@latest
+mise use -g go@latest
+go install mvdan.cc/gofumpt@latest
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+go install golang.org/x/tools/gopls@latest
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -63,6 +54,9 @@ defaults write com.googlecode.iterm2.plist "TabStyleWithAutomaticOption" -intege
 
 # Terminal.app settings
 osascript ${BASEDIR}/terminal/settings.scpt
+
+# starship
+ln -sf ${BASEDIR}/starship/starship.toml ~/.config/starship.toml
 
 # nvim
 ln -sfn ${BASEDIR}/nvim ~/.config/nvim
