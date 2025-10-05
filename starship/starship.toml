@@ -11,11 +11,6 @@ error_symbol = "[➜](red)"
 format = "[ git:\\([$branch](bold red)\\)](blue)"
 
 [custom.git_dirty]
-format = "[ $output](bright-yellow)"
+format = "[ *](bright-yellow)"
 require_repo = true
-when = true
-command = '''
-if [[ -n "$(git status --porcelain)" ]]; then
-  echo "*"
-fi
-'''
+when = '[[ -n "$(git status --porcelain)" ]]'
