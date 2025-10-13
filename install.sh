@@ -31,9 +31,10 @@ if [[ ! -f ~/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf ]]; then
   brew reinstall --cask font-jetbrains-mono-nerd-font
 fi
 
-# Install latest version of ruby
+# Install latest version of ruby and dev tools
 mise install ruby@latest
 mise use -g ruby@latest
+gem install ruby-lsp
 
 # Install latest version of go and dev tools
 mise install go@latest
@@ -41,6 +42,10 @@ mise use -g go@latest
 go install mvdan.cc/gofumpt@latest
 go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 go install golang.org/x/tools/gopls@latest
+
+# Install latest LTS version of node
+mise install node@lts
+mise use -g node@lts
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
