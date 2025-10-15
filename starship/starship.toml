@@ -14,3 +14,4 @@ format = "[ git:\\([$branch](bold red)\\)](blue)"
 format = "[ *](bright-yellow)"
 require_repo = true
 when = '[[ -n "$(git status --porcelain)" ]]'
+disabled = true
