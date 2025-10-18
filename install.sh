@@ -34,11 +34,13 @@ fi
 # Install latest version of ruby and dev tools
 mise install ruby@latest
 mise use -g ruby@latest
+mise settings add idiomatic_version_file_enable_tools ruby
 gem install ruby-lsp
 
 # Install latest version of go and dev tools
 mise install go@latest
 mise use -g go@latest
+mise settings add idiomatic_version_file_enable_tools go
 go install mvdan.cc/gofumpt@latest
 go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 go install golang.org/x/tools/gopls@latest
@@ -46,6 +48,7 @@ go install golang.org/x/tools/gopls@latest
 # Install latest LTS version of node
 mise install node@lts
 mise use -g node@lts
+mise settings add idiomatic_version_file_enable_tools node
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
