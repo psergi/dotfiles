@@ -1,5 +1,8 @@
 brew "age"
 brew "awscli"
+brew "colima"
+brew "docker"
+brew "docker-compose"
 brew "git"
 brew "helm"
 brew "mise"
@@ -9,5 +12,4 @@ brew "sops"
 brew "starship"
 
 cask "alacritty", args: { no_quarantine: true }
-cask "docker-desktop", args: { no_quarantine: true }
 cask "font-jetbrains-mono-nerd-font"
