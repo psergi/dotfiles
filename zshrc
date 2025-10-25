@@ -18,6 +18,7 @@ bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
 alias vim="nvim"
+export EDITOR="nvim"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
