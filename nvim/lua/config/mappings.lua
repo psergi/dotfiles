@@ -29,5 +29,9 @@ vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", default_opts)
 -- Alternate file
 vim.keymap.set("n", "<C-a>", "<C-^>", default_opts)
 
+-- CMD+C copy to clipboard selected text in visual mode
+vim.keymap.set("v", "<leader>c", '"+y')
+vim.keymap.set("v", "<D-c>", '"+y')
+
 -- ToggleTerm
 -- see open_mapping within toggleterm.lua
