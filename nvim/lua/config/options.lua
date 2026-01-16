@@ -26,6 +26,9 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevelstart = 99
 
+-- Disable wrapping
+vim.opt.wrap = false
+
 -- Diagnostics
 vim.diagnostic.config({
   virtual_text = false,  -- inline text
