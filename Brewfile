@@ -10,6 +10,7 @@ brew "neovim"
 brew "ripgrep"
 brew "sops"
 brew "starship"
+brew "tmux"
 
 cask "alacritty", args: { no_quarantine: true }
 cask "font-jetbrains-mono-nerd-font"

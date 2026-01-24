@@ -1,9 +1,12 @@
 return {
   "vim-test/vim-test",
   lazy = false,
+  dependencies = {
+    "preservim/vimux"
+  },
   init = function()
     vim.cmd [[
-      let test#strategy = "toggleterm"
+      let test#strategy = "vimux"
       if filereadable('bin/docker-cmd')
         let test#ruby#rspec#executable = "bin/docker-cmd spring rspec"
       elseif filereadable('bin/spring')

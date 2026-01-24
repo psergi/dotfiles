@@ -12,12 +12,16 @@ normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
 size = 14
 
 [window]
+decorations = "Buttonless"
 option_as_alt = "Both"
 padding.x = 4
 padding.y = 4
 
 [keyboard]
 bindings = [
-  { key = "Left",  mods = "Alt", chars = "\u001bb" },
-  { key = "Right", mods = "Alt", chars = "\u001bf" }
+  { key = "Left",  mods = "Alt", chars = "\u001bb" }, # Alt-b
+  { key = "Right", mods = "Alt", chars = "\u001bf" }, # Alt-f
+  { key = "P", mods = "Command", chars = "\u0010" }, # Ctrl-P
+  { key = "L", mods = "Command", chars = "\u000C" }, # Ctrl-L
+  { key = "O", mods = "Command", chars = "\u000F" }, # Ctrl-O
 ]
