@@ -61,8 +61,11 @@ ln -sfn ${BASEDIR}/alacritty ~/.config/alacritty
 # starship
 ln -sf ${BASEDIR}/starship/starship.toml ~/.config/starship.toml
 
-# nvim
+# neovim
 ln -sfn ${BASEDIR}/nvim ~/.config/nvim
+
+# tmux
+ln -sfn ${BASEDIR}/tmux ~/.config/tmux
 
 # ripgrep
 ln -sf ${BASEDIR}/ripgreprc ~/.ripgreprc
