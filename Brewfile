@@ -14,4 +14,5 @@ brew "starship"
 brew "tmux"
 
 cask "alacritty", args: { no_quarantine: true }
+cask "codex"
 cask "font-jetbrains-mono-nerd-font"
