@@ -30,5 +30,5 @@ vim.keymap.set("n", "<C-a>", "<C-^>", default_opts)
 vim.keymap.set("v", "<leader>c", '"+y')
 vim.keymap.set("v", "<D-c>", '"+y')
 
--- Toggle Vimux terminal
-vim.keymap.set("n", "<C-\\>", ":VimuxTogglePane<CR>")
+-- Close Vimux terminal
+vim.keymap.set("n", "<C-\\>", ":VimuxCloseRunner<CR>")
