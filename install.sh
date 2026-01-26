@@ -67,6 +67,13 @@ ln -sfn ${BASEDIR}/nvim ~/.config/nvim
 # tmux
 ln -sfn ${BASEDIR}/tmux ~/.config/tmux
 
+# tmuxifier
+if [ -d ~/.tmuxifier ]; then
+  git -C ~/.tmuxifier pull
+else
+  git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
+fi
+
 # ripgrep
 ln -sf ${BASEDIR}/ripgreprc ~/.ripgreprc
 
