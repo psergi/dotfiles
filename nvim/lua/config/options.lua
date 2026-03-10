@@ -53,6 +53,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Slim filetype support
+vim.filetype.add({
+  extension = {
+    slim = "slim",
+  },
+})
+
 -- TypeScript gf use telescope
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },

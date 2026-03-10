@@ -6,6 +6,7 @@ return {
   },
   init = function()
     vim.cmd [[
+      let g:VimuxHeight = "30%"
       let test#strategy = "vimux"
       if filereadable('bin/docker-cmd')
         let test#ruby#rspec#executable = "bin/docker-cmd spring rspec"

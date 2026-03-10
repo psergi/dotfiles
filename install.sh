@@ -95,6 +95,8 @@ if [[ ! -f ~/.gitconfig_local ]]; then
   git config -f ~/.gitconfig_local user.name "$full_name"
 fi
 
+mkdir -p ~/.local/bin
+
 echo
 echo "Install Successful!"
 echo
