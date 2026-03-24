@@ -21,18 +21,43 @@ vim.lsp.config("ruby_lsp", {
 vim.lsp.enable("ruby_lsp")
 
 -- TypeScript
-vim.lsp.config("ts_ls", {
-  cmd = { "npx", "typescript-language-server", "--stdio" },
+vim.lsp.config("tsgo", {
+  cmd = { "npx", "tsgo", "--lsp", "--stdio" },
   capabilities = capabilities,
   filetypes = { "typescript", "typescriptreact" },
-  init_options = {
-    preferences = {
-      jsxAttributeCompletionStyle = "auto",
-      quotePreference = "double"
-    }
-  }
+  root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 })
-vim.lsp.enable("ts_ls")
+vim.lsp.enable("tsgo")
+
+-- TypeScript OXC
+vim.lsp.config("oxlint", {
+  cmd = { "npx", "oxlint", "--lsp" },
+  capabilities = capabilities,
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_markers = { ".oxlintrc.json", "oxlint.config.ts" }
+})
+vim.lsp.enable("oxlint")
+vim.lsp.config("oxfmt", {
+  cmd = { "npx", "oxfmt", "--lsp" },
+  capabilities = capabilities,
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_markers = { ".oxfmtrc.json", ".oxfmtrc.jsonc" },
+  on_attach = function(_, bufnr)
+    local group = vim.api.nvim_create_augroup("oxfmt-" .. bufnr, { clear = true })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = group,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({
+          bufnr = bufnr,
+          name = "oxfmt",
+          timeout_ms = 3000,
+        })
+      end,
+    })
+  end,
+})
+vim.lsp.enable("oxfmt")
 
 -- Go
 vim.lsp.config("gopls", {

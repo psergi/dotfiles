@@ -17,3 +17,5 @@
 	tool = vimdiff
 [init]
 	defaultBranch = main
+[core]
+	excludesfile = /Users/phil.sergi/.gitignore_global
