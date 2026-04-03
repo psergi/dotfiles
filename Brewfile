@@ -13,6 +13,7 @@ brew "ripgrep"
 brew "sops"
 brew "starship"
 brew "tmux"
+brew "tree-sitter-cli"
 
 cask "alacritty", args: { no_quarantine: true }
 cask "codex"

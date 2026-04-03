@@ -23,7 +23,7 @@ vim.opt.signcolumn = "yes"
 
 -- Enable code folding based on treesitter
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevelstart = 99
 
 -- Disable wrapping
