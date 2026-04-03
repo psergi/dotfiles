@@ -25,7 +25,12 @@ return {
         "mermaid"
       },
       sync_install = false,
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        -- Ruby's built-in matchit rules use syntax groups to skip strings/comments.
+        -- Keep regex highlighting for Ruby so `%` does not match delimiters inside quotes.
+        additional_vim_regex_highlighting = { "ruby" },
+      },
       indent = {
         enable = true,
         disable = { "ruby", "scss" }
