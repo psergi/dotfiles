@@ -62,7 +62,7 @@ vim.filetype.add({
 
 -- TypeScript gf use telescope
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact", "go" },
   callback = function()
     vim.keymap.set("n", "gf", function()
       vim.lsp.buf.type_definition()
@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact", "ruby" },
+  pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact", "ruby", "go" },
   callback = function()
     vim.keymap.set("n", "gd", function()
       vim.lsp.buf.definition()
