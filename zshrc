@@ -21,8 +21,7 @@ bindkey "^[[B" history-beginning-search-forward
 
 alias vim="nvim"
 export EDITOR="nvim"
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
+export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
