@@ -14,8 +14,11 @@
 	old = red
 	new = green
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 [init]
 	defaultBranch = main
 [core]
 	excludesfile = /Users/phil.sergi/.gitignore_global
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" -c \"wincmd J\"
+	trustExitCode = true

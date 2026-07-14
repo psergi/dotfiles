@@ -31,6 +31,14 @@ if [[ ! -f ~/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf ]]; then
   brew reinstall --cask font-jetbrains-mono-nerd-font
 fi
 
+# Disable MacOS quarantine
+if command -v alacritty >/dev/null 2>&1; then
+  xattr -d com.apple.quarantine "$(which alacritty)" 2>/dev/null || true
+fi
+if command -v claude >/dev/null 2>&1; then
+  xattr -d com.apple.quarantine "$(which claude)" 2>/dev/null || true
+fi
+
 # Install latest version of ruby and dev tools
 mise install ruby@latest
 mise use -g ruby@latest

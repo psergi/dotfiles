@@ -16,7 +16,7 @@ brew "starship"
 brew "tmux"
 brew "tree-sitter-cli"
 
-cask "alacritty", args: { no_quarantine: true }
-cask "claude-code"
+cask "alacritty"
+cask "claude-code@latest"
 cask "codex"
 cask "font-jetbrains-mono-nerd-font"
