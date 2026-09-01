@@ -20,9 +20,22 @@ vim.lsp.config("ruby_lsp", {
 })
 vim.lsp.enable("ruby_lsp")
 
--- TypeScript
+-- TypeScript (native tsgo; published as `tsc` when the package is aliased to typescript@7)
+local function ts_lsp_cmd(root)
+  root = root or vim.fn.getcwd()
+  for _, bin in ipairs({ "tsgo", "tsc" }) do
+    local exe = root .. "/node_modules/.bin/" .. bin
+    if vim.fn.executable(exe) == 1 then
+      return { exe, "--lsp", "--stdio" }
+    end
+  end
+  return { "npx", "tsgo", "--lsp", "--stdio" }
+end
+
 vim.lsp.config("tsgo", {
-  cmd = { "npx", "tsgo", "--lsp", "--stdio" },
+  cmd = function(dispatchers, config)
+    return vim.lsp.rpc.start(ts_lsp_cmd(config.root_dir), dispatchers)
+  end,
   capabilities = capabilities,
   filetypes = { "typescript", "typescriptreact" },
   root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
