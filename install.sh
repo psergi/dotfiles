@@ -8,6 +8,8 @@ if [[ ! -f ~/.gitconfig_local ]]; then
   read -p "Email: " email
 fi
 
+mkdir -p "$HOME/.local/bin"
+
 # Install/Update Homebrew
 which -s brew
 if [[ $? != 0 ]]; then
@@ -26,6 +28,27 @@ fi
 # Install packages using Brewfile
 brew bundle
 
+# Use Homebrew's bottled mise on Apple Silicon. Homebrew no longer publishes
+# Intel macOS bottles, so use mise's official precompiled binary there.
+case "$(uname -m)" in
+  arm64)
+    MISE_BIN="$(brew --prefix mise)/bin/mise"
+    ;;
+  x86_64)
+    MISE_BIN="$HOME/.local/bin/mise"
+    mise_download="$(mktemp "$HOME/.local/bin/mise.XXXXXX")"
+    if ! curl -fsSL "https://mise.jdx.dev/mise-latest-macos-x64" -o "$mise_download"; then
+      rm -f "$mise_download"
+      exit 1
+    fi
+    chmod +x "$mise_download"
+    mv "$mise_download" "$MISE_BIN"
+    export PATH="$HOME/.local/bin:$PATH"
+    ;;
+  *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+esac
+eval "$("$MISE_BIN" activate bash)"
+
 # Ensure fonts are installed (migration assistant workaround)
 if [[ ! -f ~/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf ]]; then
   brew reinstall --cask font-jetbrains-mono-nerd-font
@@ -40,23 +63,24 @@ if command -v claude >/dev/null 2>&1; then
 fi
 
 # Install latest version of ruby and dev tools
-mise install ruby@latest
-mise use -g ruby@latest
-mise settings add idiomatic_version_file_enable_tools ruby
+"$MISE_BIN" install ruby@latest
+"$MISE_BIN" use -g ruby@latest
+"$MISE_BIN" settings add idiomatic_version_file_enable_tools ruby
 gem install ruby-lsp
 
 # Install latest version of go and dev tools
-mise install go@latest
-mise use -g go@latest
-mise settings add idiomatic_version_file_enable_tools go
+"$MISE_BIN" install go@latest
+"$MISE_BIN" use -g go@latest
+"$MISE_BIN" settings add idiomatic_version_file_enable_tools go
 go install mvdan.cc/gofumpt@latest
 go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 go install golang.org/x/tools/gopls@latest
 
 # Install latest LTS version of node
-mise install node@lts
-mise use -g node@lts
-mise settings add idiomatic_version_file_enable_tools node
+"$MISE_BIN" install node@lts
+"$MISE_BIN" use -g node@lts
+"$MISE_BIN" settings add idiomatic_version_file_enable_tools node
+npm install -g @playwright/cli@latest
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -102,8 +126,6 @@ if [[ ! -f ~/.gitconfig_local ]]; then
   git config -f ~/.gitconfig_local user.email "$email"
   git config -f ~/.gitconfig_local user.name "$full_name"
 fi
-
-mkdir -p ~/.local/bin
 
 echo
 echo "Install Successful!"
