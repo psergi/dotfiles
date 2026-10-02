@@ -8,7 +8,7 @@ brew "git"
 brew "go-task"
 brew "helm"
 brew "kubectl"
-brew "mise" if Hardware::CPU.arm?
+brew "mise"
 brew "neovim"
 brew "ripgrep"
 brew "sops"

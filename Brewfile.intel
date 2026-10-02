@@ -1,0 +1,5 @@
+# Homebrew no longer publishes new Intel bottles. Keep Intel Homebrew use to casks.
+cask "alacritty"
+cask "claude-code@latest"
+cask "codex"
+cask "font-jetbrains-mono-nerd-font"

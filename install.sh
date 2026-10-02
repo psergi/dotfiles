@@ -3,7 +3,13 @@
 set -euo pipefail
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ARCH="$(uname -m)"
 mise_download=""
+
+case "$ARCH" in
+  arm64|x86_64) ;;
+  *) echo "Unsupported architecture: $ARCH" >&2; exit 1 ;;
+esac
 
 cleanup() {
   if [[ -n "$mise_download" ]]; then
@@ -26,7 +32,7 @@ mkdir -p "$HOME/.config"
 # Install/Update Homebrew
 if ! command -v brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  if [[ "$(uname -m)" = "arm64" ]]; then
+  if [[ "$ARCH" = "arm64" ]]; then
     (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> "$HOME/.zprofile"
     eval "$(/opt/homebrew/bin/brew shellenv)"
   else
@@ -37,16 +43,15 @@ else
   brew update
 fi
 
-# Install packages using Brewfile
-brew bundle --file="$BASEDIR/Brewfile"
-
 # Use Homebrew's bottled mise on Apple Silicon. Homebrew no longer publishes
 # Intel macOS bottles, so use mise's official precompiled binary there.
-case "$(uname -m)" in
+case "$ARCH" in
   arm64)
+    brew bundle --file="$BASEDIR/Brewfile"
     MISE_BIN="$(brew --prefix mise)/bin/mise"
     ;;
   x86_64)
+    brew bundle --file="$BASEDIR/Brewfile.intel"
     MISE_BIN="$HOME/.local/bin/mise"
     mise_download="$(mktemp "$HOME/.local/bin/mise.XXXXXX")"
     if ! curl -fsSL "https://mise.jdx.dev/mise-latest-macos-x64" -o "$mise_download"; then
@@ -58,9 +63,13 @@ case "$(uname -m)" in
     mise_download=""
     export PATH="$HOME/.local/bin:$PATH"
     ;;
-  *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
 esac
 eval "$("$MISE_BIN" activate bash)"
+
+if [[ "$ARCH" = "x86_64" ]]; then
+  source "$BASEDIR/install/packages-intel.sh"
+  install_intel_packages
+fi
 
 # Ensure fonts are installed (migration assistant workaround)
 if [[ ! -f "$HOME/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf" ]]; then
