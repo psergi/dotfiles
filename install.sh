@@ -95,7 +95,7 @@ gem install ruby-lsp
 "$MISE_BIN" use -g go@latest
 "$MISE_BIN" settings add idiomatic_version_file_enable_tools go
 go install mvdan.cc/gofumpt@latest
-go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
 go install golang.org/x/tools/gopls@latest
 
 # Install latest LTS version of node
